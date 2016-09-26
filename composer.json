@@ -1,0 +1,28 @@
+{
+  "name": "eycopia/excel",
+  "type": "library",
+  "description": "Wrapper for PHPEXCEL",
+  "keywords": ["phpexcel","excel"],
+  "homepage": "https://github.com/eycopia/php-exel",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jorge L. Copia Silva",
+      "email": "eycopia@gmail.com",
+      "homepage": "http://tiricaya.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": ">=5.3",
+    "phpoffice/phpexcel" : "^1.8"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8"
+  },
+  "autoload": {
+    "classmap": [
+      "wrapper"
+    ]
+  }
+}
