@@ -1,5 +1,5 @@
-<?php require_once dirname(dirname(__FILE__)) . "/vendor/autoload.php";
-//require_once "excel/PHPExcel/IOFactory.php";
+<?php
+//require_once dirname(dirname(__FILE__)) . "/vendor/autoload.php";
 use \PHPExcel as PHPExcel;
 use \PHPExcel_IOFactory as PHPExcel_IOFactory;
 
