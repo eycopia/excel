@@ -71,7 +71,7 @@ class Excel
      * @param int     $row    row position (Y start en 1)
      * @param string  $value  value to set
      * @param boolean $border active/inactive cell borders
-     * @return  this
+     * @return  Excel
      */
     public function setValue($cell, $row, $value, $border=false){
         $this->engine->getActiveSheet()->setCellValueByColumnAndRow($cell, $row, $value);
@@ -108,7 +108,7 @@ class Excel
 
     /**
      * Make the cell text in a cell Bold
-     * @return void
+     * @return Excel
      */
     public function bold(){
         $style = array(
@@ -117,6 +117,7 @@ class Excel
             )
         );
         $this->engine->getActiveSheet()->getStyle("$this->x$this->y")->applyFromArray($style);
+        return $this;
     }
 
     /**
@@ -125,7 +126,7 @@ class Excel
      * @param  int $row
      * @param  int $numCell numbers of alphabet to marge
      * @param boolean $border active/inactive border for merge
-     * @return void
+     * @return Excel
      */
     public function merge($cell, $row, $numCell, $border=false){
         $style = array(
@@ -141,12 +142,33 @@ class Excel
             $this->engine->getActiveSheet()->getStyle("$from:$to")
                 ->applyFromArray($this->style);
         }
+        return $this;
+    }
+
+    /**
+     * Add image on actual sheet
+     * @param $title
+     * @param $description
+     * @param $path
+     * @param $width
+     * @param $coordinate
+     *
+     * @throws \PHPExcel_Exception
+     */
+    public function addImage($title, $description, $path, $width, $coordinate){
+        $objDrawing = new PHPExcel_Worksheet_Drawing();
+        $objDrawing->setName($title);
+        $objDrawing->setDescription($description);
+        $objDrawing->setPath($path);
+        $objDrawing->setHeight($width);
+        $objDrawing->setCoordinates($coordinate);
+        $objDrawing->setWorksheet($this->engine->getActiveSheet());
     }
 
     /**
      * Download file
      * @param  string $fileName
-     * @return File
+     * @return string
      */
     public function download($fileName){
         header('Content-type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; charset=UTF-8');
@@ -159,7 +181,7 @@ class Excel
     }
 
     /**
-     * @return php://output
+     * @return string
      * @throws \PHPExcel_Reader_Exception
      */
     public function save(){
