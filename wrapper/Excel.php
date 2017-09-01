@@ -121,6 +121,20 @@ class Excel
     }
 
     /**
+     * Make set color on text
+     * @return Excel
+     */
+    public function color($color){
+        $style = array(
+            'font' => array(
+                'color' => array('rgb'=>$color)
+            )
+        );
+        $this->engine->getActiveSheet()->getStyle("$this->x$this->y")->applyFromArray($style);
+        return $this;
+    }
+
+    /**
      * Merge alphabet
      * @param  int $cell  for index 0 value is A, for index 1 value B
      * @param  int $row
